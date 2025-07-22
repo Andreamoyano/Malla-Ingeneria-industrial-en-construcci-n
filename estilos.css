@@ -10,15 +10,35 @@ h1 {
   color: #e91e63;
 }
 
+#creditos {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
 .map {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 20px;
   justify-content: center;
 }
 
+.semestre {
+  border: 2px dashed #e91e63;
+  padding: 10px;
+  border-radius: 10px;
+  min-width: 220px;
+}
+
+.semestre h2 {
+  text-align: center;
+  color: #e91e63;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
 .course {
-  padding: 10px 20px;
+  padding: 10px 10px;
   background: #ffc0cb;
   border: 2px solid #e91e63;
   border-radius: 8px;
@@ -26,6 +46,8 @@ h1 {
   opacity: 0.6;
   transition: 0.2s;
   user-select: none;
+  margin-bottom: 5px;
+  text-align: center;
 }
 
 .course.unlocked {
@@ -44,3 +66,4 @@ h1 {
   color: #aaa;
   cursor: not-allowed;
 }
+
