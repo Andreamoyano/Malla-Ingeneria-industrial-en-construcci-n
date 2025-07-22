@@ -17,4 +17,17 @@ const prereqs = {
   "ICC2204": ["EYP1113"],
   "ICS2122": ["ICS2121", "ICS2123", "ICS2563"]
 };
+function updateCredits() {
+  const approved = document.querySelectorAll('.course.approved');
+  let total = 0;
+  approved.forEach(c => {
+    total += parseInt(c.dataset.credits || 0);
+  });
+  document.getElementById("creditos").innerText = `Créditos aprobados: ${total}`;
+}
 
+if (course.classList.contains("unlocked") && !course.classList.contains("approved")) {
+  course.classList.add("approved");
+  updateUnlocks();
+  updateCredits(); // <= aquí
+}
