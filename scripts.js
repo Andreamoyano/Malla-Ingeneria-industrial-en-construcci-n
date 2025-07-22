@@ -1,4 +1,3 @@
-// Requisitos de cada ramo (prerrequisitos)
 const prereqs = {
   "MAT1610": ["MAT1000"],
   "MAT1620": ["MAT1610"],
@@ -18,6 +17,7 @@ const prereqs = {
   "ICS2122": ["ICS2121", "ICS2123", "ICS2563"]
 };
 
+// Actualiza créditos aprobados
 function updateCredits() {
   const approved = document.querySelectorAll('.course.approved');
   let total = 0;
@@ -27,35 +27,51 @@ function updateCredits() {
   document.getElementById("creditos").innerText = `Créditos aprobados: ${total}`;
 }
 
+// Verifica si un curso puede desbloquearse (todos sus requisitos están aprobados)
+function canUnlock(code) {
+  const required = prereqs[code] || [];
+  return required.every(req =>
+    document.querySelector(`.course[data-code="${req}"]`)?.classList.contains("approved")
+  );
+}
+
+// Actualiza el estado de todos los cursos (locked, unlocked, approved)
 function updateUnlocks() {
   const allCourses = document.querySelectorAll(".course");
+
   allCourses.forEach(course => {
     const code = course.dataset.code;
-    const required = prereqs[code] || [];
-    const passed = required.every(req =>
-      document.querySelector(`.course[data-code="${req}"]`)?.classList.contains("approved")
-    );
+    const isApproved = course.classList.contains("approved");
 
-    if (required.length === 0 || passed) {
+    if (isApproved) {
+      course.classList.remove("locked");
+      course.classList.add("unlocked");
+      return;
+    }
+
+    if (canUnlock(code)) {
       course.classList.add("unlocked");
       course.classList.remove("locked");
     } else {
       course.classList.remove("unlocked");
+      course.classList.remove("approved");
       course.classList.add("locked");
     }
   });
 }
 
+// Habilita clic para alternar aprobación (on/off)
 document.querySelectorAll(".course").forEach(course => {
   course.addEventListener("click", () => {
     if (!course.classList.contains("unlocked")) return;
 
-    course.classList.toggle("approved");  // ← permite apretar y desapretar
+    course.classList.toggle("approved"); // ← alterna estado
     updateUnlocks();
     updateCredits();
   });
 });
 
+// Inicializa
 updateUnlocks();
 updateCredits();
 
