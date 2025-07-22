@@ -1,0 +1,46 @@
+body {
+  background-color: #fff0f6;
+  font-family: sans-serif;
+  margin: 20px;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  color: #e91e63;
+}
+
+.map {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.course {
+  padding: 10px 20px;
+  background: #ffc0cb;
+  border: 2px solid #e91e63;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: 0.2s;
+  user-select: none;
+}
+
+.course.unlocked {
+  opacity: 1;
+}
+
+.course.approved {
+  background: #e91e63;
+  color: white;
+  opacity: 1;
+}
+
+.course.locked {
+  background: #eee;
+  border-color: #ccc;
+  color: #aaa;
+  cursor: not-allowed;
+}
