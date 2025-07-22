@@ -48,14 +48,15 @@ function updateUnlocks() {
 
 document.querySelectorAll(".course").forEach(course => {
   course.addEventListener("click", () => {
-    if (course.classList.contains("unlocked") && !course.classList.contains("approved")) {
-      course.classList.add("approved");
-      updateUnlocks();
-      updateCredits();
-    }
+    if (!course.classList.contains("unlocked")) return;
+
+    course.classList.toggle("approved");  // ← permite apretar y desapretar
+    updateUnlocks();
+    updateCredits();
   });
 });
 
 updateUnlocks();
 updateCredits();
+
 
